@@ -11,11 +11,12 @@ course_username = "21020071"
 course_password = "hieulc123456zo"
 @pytest.fixture
 def browser():
-    driver = webdriver.Chrome()
+    driver = webdriver.Remote(
+        command_executor='http://172.18.0.1:4444/wd/hub', options=webdriver.ChromeOptions())
+
     driver.set_page_load_timeout(30)
     yield driver
     driver.quit()
-
 
 def test_title(browser):
     browser.get("https://courses.uet.vnu.edu.vn/")
